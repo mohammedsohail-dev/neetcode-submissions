@@ -1,0 +1,27 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+        for(int num:nums){
+            sum = sum + num;
+        }
+        if(sum%2 != 0){
+            return false;
+        }
+
+        int target = sum /2;
+
+        return dfs(nums, 0 , target);
+    }
+
+    public boolean dfs(int[] nums, int i, int target){
+        if(i == nums.length){
+            return target == 0;
+        }
+
+        if(target < 0){
+            return false;
+        }
+
+        return dfs(nums, i+1,target) || dfs(nums, i+1, target - nums[i]);
+    }
+}
